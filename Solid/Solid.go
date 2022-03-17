@@ -5,22 +5,36 @@ import (
 )
 
 func Solid(text string, key string) string {
-	alphabet := "абвгдеёжзийклмнопрстуфхцчшщъыьэюя"
-	alphabetrune := []rune(alphabet)
-	keyrune := []rune(key)
+	alphabetslice := strings.Split("абвгдеёжзийклмнопрстуфхцчшщъыьэюя", "")
+	keyslice := strings.Split(key, "")
+	textslice := strings.Split(text, " ")
+	countspace := len(textslice) - 1
 	res := ""
-	for i, k := range text {
-		if string(k) == " " {
+
+	for _, k := range textslice {
+		text2 := strings.Split(k, "")
+		for i, j := range text2 {
+
+			textindex := SearchIndex(alphabetslice, string(j))
+			keyindex := SearchIndex(alphabetslice, string(keyslice[i%len(keyslice)]))
+			res = res + alphabetslice[(textindex+keyindex)%len(alphabetslice)]
+		}
+		if countspace > 0 {
 			res = res + " "
-			continue
-		} else {
-			textindex := strings.Index(alphabet, string(k))/2 + (strings.Index(alphabet, string(k)) % 2)
-			keyindex := strings.Index(alphabet, string(keyrune[(i/2)%len(keyrune)])) / 2
-			res = res + string(alphabetrune[(textindex+keyindex)%len(alphabetrune)])
+			countspace--
 		}
 
 	}
-
 	return res
 
+}
+
+// Поиск индекса в строке
+func SearchIndex(alphabet []string, char string) int {
+	for i, k := range alphabet {
+		if k == char {
+			return i
+		}
+	}
+	return -1
 }

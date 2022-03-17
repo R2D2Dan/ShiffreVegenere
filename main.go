@@ -17,10 +17,11 @@ func main() {
 	text.Scan()
 	fmt.Print("Введите ключ который нужно зашифровать:")
 	key.Scan()
-	fmt.Println("Начался процес шифрования...")
+	fmt.Printf("Начался процес шифрования...\n\n\n\n")
 
 	res := solid.Solid(text.Text(), key.Text())
 
-	fmt.Println(res)
+	fmt.Printf("Зашифрованный текст:%s\n", res)
+	fmt.Println("Процес шифрования закончен...")
 
 }
