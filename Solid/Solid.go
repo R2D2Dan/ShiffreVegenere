@@ -4,8 +4,19 @@ import (
 	"strings"
 )
 
-func Solid(text string, key string) string {
-	alphabetslice := strings.Split("абвгдеёжзийклмнопрстуфхцчшщъыьэюя", "")
+func Solid(text string, key string, language string) string {
+
+	ru := "абвгдеёжзийклмнопрстуфхцчшщъыьэюя"
+	en := "abcdefghijklmnopqrstuvwxyz"
+	var alphabetslice []string
+
+	switch language {
+	case "ru":
+		alphabetslice = strings.Split(ru, "")
+	case "en":
+		alphabetslice = strings.Split(en, "")
+	}
+
 	keyslice := strings.Split(key, "")
 	textslice := strings.Split(text, " ")
 	countspace := len(textslice) - 1
