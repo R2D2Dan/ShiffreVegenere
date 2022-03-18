@@ -15,6 +15,8 @@ func Solid(text string, key string, language string) string {
 		alphabetslice = strings.Split(ru, "")
 	case "en":
 		alphabetslice = strings.Split(en, "")
+	default:
+		return "Ошибка значения языка"
 	}
 
 	keyslice := strings.Split(key, "")
