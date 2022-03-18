@@ -14,13 +14,13 @@ func main() {
 	fmt.Print("Please specify lang and [ru/en] and press enter:")
 
 	res := Start()
+	fmt.Printf("\nЗашифрованный текст:%v ", res)
 
-	fmt.Printf("Зашифрованный текст:%s\n", res)
-	fmt.Println("Процес шифрования закончен...")
+	fmt.Println("\nПроцес шифрования закончен...")
 
 }
 
-func Start() string {
+func Start() []string {
 
 	words := bufio.NewScanner(os.Stdin)
 	key := bufio.NewScanner(os.Stdin)

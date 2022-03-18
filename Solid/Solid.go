@@ -1,14 +1,16 @@
 package solid
 
 import (
+	"fmt"
 	"strings"
 )
 
-func Solid(text string, key string, language string) string {
+func Solid(text string, key string, language string) []string {
 
 	ru := "абвгдеёжзийклмнопрстуфхцчшщъыьэюя"
 	en := "abcdefghijklmnopqrstuvwxyz"
 	var alphabetslice []string
+	var res []string
 
 	switch language {
 	case "ru":
@@ -16,26 +18,25 @@ func Solid(text string, key string, language string) string {
 	case "en":
 		alphabetslice = strings.Split(en, "")
 	default:
-		return "Ошибка значения языка"
+		return []string{"Ошибка"}
 	}
 
 	keyslice := strings.Split(key, "")
 	textslice := strings.Split(text, " ")
-	countspace := len(textslice) - 1
-	res := ""
-
+	fmt.Println(textslice)
 	for _, k := range textslice {
 		text2 := strings.Split(k, "")
+		word := ""
 		for i, j := range text2 {
 
 			textindex := SearchIndex(alphabetslice, string(j))
 			keyindex := SearchIndex(alphabetslice, string(keyslice[i%len(keyslice)]))
-			res = res + alphabetslice[(textindex+keyindex)%len(alphabetslice)]
+			word = word + alphabetslice[(textindex+keyindex)%len(alphabetslice)]
+
 		}
-		if countspace > 0 {
-			res = res + " "
-			countspace--
-		}
+		fmt.Println(word)
+
+		res = append(res, word)
 
 	}
 	return res
