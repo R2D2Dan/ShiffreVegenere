@@ -45,6 +45,7 @@ func Start() []string {
 	fmt.Printf("Начался процес шифрования...\n\n")
 
 	res := solid.Solid(words.Text(), key.Text(), language.Text())
+
 	return res
 
 }

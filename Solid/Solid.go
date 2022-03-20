@@ -1,7 +1,6 @@
 package solid
 
 import (
-	"fmt"
 	"strings"
 )
 
@@ -9,36 +8,34 @@ func Solid(text string, key string, language string) []string {
 
 	ru := "абвгдеёжзийклмнопрстуфхцчшщъыьэюя"
 	en := "abcdefghijklmnopqrstuvwxyz"
-	var alphabetslice []string
-	var res []string
 
+	var alphabetslice []string
 	switch language {
 	case "ru":
 		alphabetslice = strings.Split(ru, "")
 	case "en":
 		alphabetslice = strings.Split(en, "")
-	default:
-		return []string{"Ошибка"}
 	}
 
-	keyslice := strings.Split(key, "")
-	textslice := strings.Split(text, " ")
-	fmt.Println(textslice)
-	for _, k := range textslice {
-		text2 := strings.Split(k, "")
-		word := ""
-		for i, j := range text2 {
+	var res []string
+	textclice := strings.Split(text, "")
+	keyclice := strings.Split(key, "")
+	i := 0
+	for _, k := range textclice {
+		if string(k) != " " {
 
-			textindex := SearchIndex(alphabetslice, string(j))
-			keyindex := SearchIndex(alphabetslice, string(keyslice[i%len(keyslice)]))
-			word = word + alphabetslice[(textindex+keyindex)%len(alphabetslice)]
+			indextext := SearchIndex(alphabetslice, string(k))
 
+			keyindex := SearchIndex(alphabetslice, keyclice[i%len(keyclice)])
+
+			res = append(res, alphabetslice[(indextext+keyindex)%len(alphabetslice)])
+			i++
+		} else {
+			res = append(res, " ")
 		}
-		fmt.Println(word)
-
-		res = append(res, word)
 
 	}
+
 	return res
 
 }
